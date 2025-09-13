@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Powered-By "Oscar Ochoa"
+
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'"
+
+  # Cache everything on CDN by default
+  Header set Cache-Control "public, s-maxage=604800, max-age=0"
+  
+  # Cache in browser all assets
+  <If "%{REQUEST_URI} =~ m#^/assets/.*$#">
+    Header set Cache-Control "public, max-age=604800"
+  </If>
+</IfModule>

@@ -1,0 +1,3 @@
+Contact: oscarfdo2004@gmail.com
+Preferred-Languages: es, en
+Canonical: https://www.oscarochoa.pro/.well-known/security.txt
